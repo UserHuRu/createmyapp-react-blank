@@ -1,5 +1,6 @@
 const { injectBabelPlugin } = require('react-app-rewired')
 const rewireLess = require('react-app-rewire-less')
+const rewireEslint = require('react-app-rewire-eslint')
 const path = require('path')
 
 function resolve (dir) {
@@ -7,6 +8,8 @@ function resolve (dir) {
 }
 
 module.exports = function override (config, env) {
+  config = rewireEslint(config, env)
+
   config = injectBabelPlugin(['import', {libraryName: 'antd', libraryDiretory: 'es', style: 'css'}], config)
   
   // 配置主题
